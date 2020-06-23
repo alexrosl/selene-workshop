@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    healthcheck:
+      test: "exit 0"
+  video_service:
+    image: spirogov/video_service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_DB_HOST: mysql:3306
